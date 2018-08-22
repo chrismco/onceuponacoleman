@@ -1,0 +1,709 @@
+// Navigation Variables Chris
+$content-width: 1000px;
+$breakpoint: 799px;
+$nav-height: 65px;
+$nav-background: #ad767b;
+$nav-font-color: #ffffff;
+$link-hover-color: #b0ac85;
+$grayBG: #e2e2e2;
+$rose: #b77b82;
+$olive: #b0ac85;
+
+//Fonts
+$b-sans: "beloved-sans",sans-serif;
+$b-script: "beloved-script",sans-serif;
+$fire-sans: "fira-sans-2",sans-serif;
+
+@mixin fontSelector($fontFamily, $fontWeight) {
+  font: {
+    family: $fontFamily;
+    weight: $fontWeight;
+  }
+}
+@mixin dividerLine($margin, $height, $color, $width) {
+    margin: $margin;
+    height:$height;
+    background: $color;
+    width:$width
+}
+
+@mixin verticalLine{
+  .outer {
+    width: 1px;
+    height: 39px;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+  }
+  .inner {
+    position: absolute;
+    width:100%;
+    height: 39px;
+    background: white;
+  
+  }
+}
+
+@mixin header{
+  header{
+    text-align: center;
+    img{
+      display: inline-block;
+      padding: 0 20px;
+      @media (min-width: 576px) and (max-width: 767.98px) { 
+        
+       }
+       @media (max-width: 575.98px) { 
+        width:94px;
+        }
+    }
+    h2{
+      @include fontSelector($b-script, 600);
+      font-size: 96px;
+      color: $rose;
+      margin-bottom: 20px;
+      display: inline-block;
+      @media (min-width: 768px) and (max-width: 991.98px) { 
+        font-size: 56px;
+     }
+     @media (min-width: 576px) and (max-width: 767.98px) { 
+      font-size: 36px;
+     }
+     @media (max-width: 575.98px) { 
+      font-size: 26px;
+      }
+    }
+  }
+}
+
+
+// Outer navigation wrapper
+.navigation {
+  height: $nav-height;
+  background: $nav-background;
+  position: fixed;
+  z-index: 900;
+  width: 100%;
+}
+
+
+// Logo and branding
+.brand {
+  position: absolute;
+  padding-left: 20px;
+  float: left;
+  line-height: $nav-height;
+  text-transform: uppercase;
+  font-size: 1.4em;
+  a,
+  a:visited {
+    color: $nav-font-color;
+    text-decoration: none;
+  }
+}
+
+// Container with no padding for navbar
+.nav-container {
+  max-width: $content-width;
+  margin: 0 auto;
+}
+
+// Navigation 
+nav {
+  display: table !important;
+  margin:  0 auto;
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      float: left;
+      position: relative;
+      @include fontSelector($b-sans, 600 );
+      a,
+      
+      a:visited {
+        display: block;
+        padding: 0 20px;
+        line-height: $nav-height;
+        background: $nav-background;
+        color: $nav-font-color;
+        text-decoration: none;
+        &:hover {
+          background: $link-hover-color;
+          color: $nav-font-color;
+          text-decoration: none;
+        }
+        &:not(:only-child):after {
+          padding-left: 4px;
+          content: ' ▾';
+        }
+      } // Dropdown list
+      ul li {
+        min-width: 190px;
+        a {
+          padding: 15px;
+          line-height: 20px;
+        }
+      }
+    }
+  }
+}
+
+// Dropdown list binds to JS toggle event
+.nav-dropdown {
+  position: absolute;
+  display: none;
+  z-index: 1;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile navigation */
+
+// Binds to JS Toggle
+.nav-mobile {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: $nav-background;
+  height: $nav-height;
+  width: $nav-height;
+}
+@media only screen and (max-width: 798px) {
+  // Hamburger nav visible on mobile only
+  .nav-mobile {
+    display: block;
+  }
+  nav {
+   width: 100%;
+    padding: $nav-height 0 15px;
+    ul {
+      display: none;
+      li {
+        float: none;
+        a {
+          padding: 15px;
+          line-height: 20px;
+        }
+        ul li a {
+          padding-left: 30px;
+        }
+      }
+    }
+  }
+  .nav-dropdown {
+    position: static;
+  }
+}
+@media screen and (min-width: $breakpoint) {
+  .nav-list {
+    display: block !important;
+  }
+}
+#nav-toggle {
+  position: absolute;
+  left: 18px;
+  top: 22px;
+  cursor: pointer;
+  padding: 10px 35px 16px 0px;
+  span,
+  span:before,
+  span:after {
+    cursor: pointer;
+    border-radius: 1px;
+    height: 5px;
+    width: 35px;
+    background: $nav-font-color;
+    position: absolute;
+    display: block;
+    content: '';
+    transition: all 300ms ease-in-out;
+  }
+  span:before {
+    top: -10px;
+  }
+  span:after {
+    bottom: -10px;
+  }
+  &.active span {
+    background-color: transparent;
+    &:before,
+    &:after {
+      top: 0;
+    }
+    &:before {
+      transform: rotate(45deg);
+    }
+    &:after {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+//BG
+
+$bgImg: '../../img/CA_Header.jpg';
+$bgImg2: '../../img/BG.png';
+
+
+body {
+  background: url($bgImg2) no-repeat center center fixed;
+  background-size: cover;
+}
+
+//Header
+#header{
+  padding: 105px 0 100px;
+  // margin-top: 105px;
+  @include fontSelector($b-sans,600 );
+  text-align: center;
+  color: #fff;
+  .headerTag{
+    font-size: 24px;
+    margin-bottom: 76px;
+  }
+  .divider{
+    margin: 48px 0;
+    height:2px;
+    background: #fff;
+  }
+  .date{
+    font-size:53.33px;
+    letter-spacing: 15px;
+    margin-bottom: 113px;
+    display: inline-block;
+    @media (min-width: 768px) and (max-width: 991.98px) { 
+      font-size: 36px;
+   }
+   @media (min-width: 576px) and (max-width: 767.98px) { 
+    font-size: 36px;
+   }
+   @media (max-width: 575.98px) { 
+    font-size: 18px;
+    }
+  }
+  .hashtag{
+    font-size: 40px;
+    letter-spacing: 2px;
+    @media (min-width: 768px) and (max-width: 991.98px) { 
+     
+   }
+   @media (min-width: 576px) and (max-width: 767.98px) { 
+    font-size: 24px;
+   }
+   @media (max-width: 575.98px) { 
+    font-size: 24px;
+    }
+  }
+}
+
+//Bride and Groom
+$brideGroomBG: '../../img/bride-groom-bg.png';
+
+#bride-groom{
+  padding: 62px 0 65px;
+  // height: 924px;
+  // background-color: $grayBG;
+  background: url($brideGroomBG) no-repeat left center $grayBG;
+  background-size: contain;
+  @media (max-width: 575.98px) { 
+    background: url($brideGroomBG) no-repeat $grayBG;
+    background-size: cover;
+}
+ @include header;
+  article{
+    position: relative;
+    .info{
+      width: 550px;
+      height: 375px;
+      background-color: #fff;
+      position: absolute;
+      left: -123px ;
+      top:20%;
+      padding: 35px;
+       @media (min-width: 992px) and (max-width: 1199.98px) { 
+         left: -188px;
+        }
+        @media (min-width: 768px) and (max-width: 991.98px) { 
+            width:450px;
+            height:275px;
+            padding: 15px;
+         }
+         @media (min-width: 576px) and (max-width: 767.98px) { 
+           position: relative;
+           top: auto;
+           left: auto;
+           margin: 35px auto;
+          }
+          @media (max-width: 575.98px) { 
+            width:100%;
+            height:275px;
+            padding: 15px;
+            position: relative;
+            top: auto;
+            left: auto;
+            margin: 15px 0;
+           }
+      .border-around{
+        position: absolute;
+        height: 275px;
+    /* float: left; */
+        border: 1px solid $olive;
+        width: 480px;
+        top: 57px;
+        @media (min-width: 992px) and (max-width: 1199.98px) { 
+         }
+         @media (min-width: 768px) and (max-width: 991.98px) { 
+             height:200px;
+             width: 420px;
+             top:37px;
+          }
+          @media (max-width: 575.98px) { 
+           display: none;
+           }
+      }
+      .border-text{
+        display: block;
+        position: relative;
+        z-index: 100;
+        h3{
+          @include fontSelector($b-sans, 600);
+          text-align: center;
+          border-bottom: 1px solid $olive;
+          font-size: 18px;
+          color: $rose;
+          @media (max-width: 378.98px) { 
+            font-size: 12px;
+            }
+          span{
+            background-color: white;
+            position: relative;
+            top:12px;
+            padding: 0 10px;
+          }
+        }
+        .names{
+          margin: 60px auto;
+          display: table;
+          @include fontSelector($b-script, 600);
+          font-size: 43px;
+          @media (min-width: 992px) and (max-width: 1199.98px) { 
+          }
+          @media (min-width: 768px) and (max-width: 991.98px) { 
+              font-size: 33px;
+              margin: 30px auto;
+           }
+           @media (max-width: 575.98px) { 
+                margin:30px auto;
+                font-size: 33px;
+            }
+            font-size: 23px;
+           img{
+            @media (min-width: 768px) and (max-width: 991.98px) { 
+                width: 54px;
+             }
+             @media (max-width: 575.98px) { 
+              width: 44px;
+              }
+           }
+          .groom{
+            color: $olive
+          }
+          .bride{
+            color:$rose;
+            strong{
+              margin-left: 30px;
+            }
+          }
+          strong{
+            @include fontSelector($b-sans, 600);
+            display: block;
+            position: relative;
+            font-size: 16px;
+            @media (min-width: 768px) and (max-width: 991.98px) { 
+                font-size: 12px;
+             }
+          }
+          
+        }
+      }
+      &::after{
+        content: '&';
+        position: absolute;
+        color: #f2f2f2;
+        @include fontSelector($b-script, 500 );
+        font-size: 200px;
+        top:58%;
+        left: 48%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+}
+
+//Our Story
+$ourStoryBG: '../../img/story-bg.png';
+
+@mixin border($size, $type, $color){
+  border:$size $type $color;
+}
+
+#our-story{
+  background: url($ourStoryBG) no-repeat right center $rose;
+  background-size: contain;
+  @media (max-width: 575.98px) { 
+    background: url($ourStoryBG) no-repeat $rose;
+    background-size: cover;
+}
+  color:white;
+  header{
+    @include verticalLine;
+    .est{
+      span{
+        padding:7px;
+        @include border(1px, solid, white);
+        @include fontSelector($b-sans,600 );
+        display: table;
+        position: relative;
+        margin:25px auto 0px;
+      }
+     
+    }
+    .divider{
+      @include dividerLine(0 auto 15px, 1px , white, 67px)
+    }
+    h2{
+      @include fontSelector($b-script,600 );
+      font-size: 70px;
+     text-align: center;
+     position: relative;
+     z-index: 1;
+     @media (max-width: 575.98px) { 
+      font-size: 50px;
+  }
+     &::before{
+      border-top: 28px solid $olive;
+      content:"";
+      margin: 0 auto; /* this centers the line to the full width specified */
+      position: absolute; /* positioning must be absolute here, and relative positioning must be applied to the parent */
+      top: 30%; left: 0; right: 0; bottom: 0;
+      width: 35%;
+      z-index: -1;
+     }
+
+
+    }
+  }
+  article#story{
+    @include fontSelector($fire-sans, 500);
+    text-align: center;
+    p.story{
+      max-width: 950px;
+      font-size: 14px;
+      margin: 0 auto;
+    }
+    p.the-rest{
+      @include fontSelector($b-script, 600);
+      font-size: 48px;
+     margin-bottom: 15px;
+    }
+    @include verticalLine;
+    .outer{
+      height: 72px !important;
+      .inner{
+        height: 72px !important;
+      }
+    }
+    .divider{
+      @include dividerLine(0 auto, 1px , white, 67px)
+    }
+  }
+}
+
+
+//Timeline
+
+$timelineBG: '../../img/timeline-bg.png';
+
+#timeline{
+  background: url($timelineBG) repeat-y center center white;
+  background-size:cover;
+  padding: 20px 0 40px;
+  article{
+    img{
+      max-width: 100%;
+      min-width: 300px;
+    }
+  }
+}
+
+//Up Next
+#up-next{
+  color:$olive;
+  background: white;
+  text-align: center;
+  padding-bottom: 55px;
+  @include verticalLine;
+  .outer{
+    height:72px !important;
+    background: $olive;
+    .inner{
+      height:72px !important;
+      background: $olive;
+    }
+  }
+  .up-next{
+    span{
+      padding:7px;
+      @include border(1px, solid, $olive);
+      @include fontSelector($b-sans,600 );
+      display: table;
+      position: relative;
+      margin:0 auto 48px;
+    }
+  }
+  .date{
+    @include fontSelector($b-sans,600 );
+    font-size:42px;
+   
+     @media (max-width: 575.98px) { 
+      font-size:22px;
+      }
+  }
+  .i-do{
+    @include fontSelector($fire-sans,500 );
+    font-size:57px;
+    font-style: italic;
+    margin-bottom: 25px;
+    @media (min-width: 576px) and (max-width: 767.98px) { 
+      font-size:47px;
+    }
+    @media (max-width: 575.98px) { 
+     font-size:27px;
+     }
+  }
+}
+
+
+//Photos
+#photos{
+  padding-top: 78px;
+  @include header;
+  header{
+    margin-bottom: 58px;
+    h2{
+      color:white;
+    }
+    p{
+      @include fontSelector($b-sans,600 );
+      font-size: 18px;
+      color:white;
+    }
+  }
+  .photos{
+    .row{
+      margin-bottom: 34px;
+    }
+  }
+}
+
+//Wedding Party
+
+#party{
+  @include header;
+  header{
+    margin: 100px auto 58px;
+    h2{
+      color:white;
+    }
+    p{
+      @include fontSelector($b-sans,600 );
+      font-size: 18px;
+      color:white;
+    }
+  }
+  .grooms{
+    .inner-v-banner{
+      background:url(../../img/grooms-banner-bg.png) no-repeat center bottom $olive !important;
+      background-size:cover;
+    }
+  }
+  .party{
+    .row{
+      margin-top: 55px;
+    }
+    .v-banner{
+      position: relative;
+      height: 100%;
+      color: white;
+      @include fontSelector($b-script, 600 );
+     
+      h3{
+        font-size: 60px !important;
+        margin-bottom: 90px;
+        @media (min-width: 768px) and (max-width: 991.98px) { 
+          margin-bottom: 0;
+          font-size: 40px !important;
+        }
+        @media  (max-width: 767.98px) { 
+          margin-bottom: 0;
+          font-size: 30px !important;
+        }
+      }
+      
+      .inner-v-banner{
+        background:url(../../img/bridesmaid-banner-bg.png) no-repeat center bottom $rose;
+        background-size:cover;
+        text-align: center;
+        bottom: 9px;
+        top: 10px;
+        position: absolute;
+        width:100%;
+        @media  (max-width: 767.98px) { 
+          position: relative;
+         height: 185px;
+         margin-bottom: 20px;
+         }
+       .content{
+        top: 50%;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        position: absolute;
+       }
+      }
+    }
+  }
+  .slick-slide{
+    .party-container{
+      border: 1px solid white;
+      color:white;
+      margin: 10px;
+
+      .party-img{
+        padding: 20px;
+        text-align: center;
+        img{
+          display: inline-block;
+        }
+      }
+      .party-name{
+          @include fontSelector($b-script, 600 );
+          font-size: 48px;
+          border-bottom: 1px solid white;
+          border-top: 1px solid white;
+          padding: 10px 20px;
+      }
+      .party-title{
+        @include fontSelector($b-sans, 600 );
+        font-size: 18px;
+        padding: 10px 20px;
+      }
+    }
+    
+  }
+}
+
+
+
+//RSVP
